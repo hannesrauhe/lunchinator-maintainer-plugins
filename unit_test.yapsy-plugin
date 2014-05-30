@@ -1,0 +1,9 @@
+[Core]
+Name = Unit Tests
+Module = unit_test
+
+[Documentation]
+Author = Hannes Rauhe, Cornelius Ratsch
+Version = 0.1
+Website = http://www.lunchinator.de
+Description = Tests the lunchinator functionality
