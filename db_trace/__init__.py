@@ -24,7 +24,6 @@ class lunchSQLTrace(lunch_db):
         lunch_db.__init__(self)
         
         self.trace_file=trace_file
-        self.is_open = False
         self.file_handle = None
         
     def open(self):       
@@ -42,17 +41,6 @@ class lunchSQLTrace(lunch_db):
         '''@todo UTF-8'''
         self.file_handle.write( query + "\n" ) 
         self.file_handle.write( str(wildcards) + "\n")
-        
-    
-    '''Statistics'''
-    def insert_call(self,mtype,msg,sender):
-        self.execute("INSERT INTO messages(mtype,message,sender,rtime) VALUES (?,?,?,strftime('%s', 'now'))",mtype,msg,sender)
-    
-    def insert_members(self,ip,name,avatar,lunch_begin,lunch_end):
-        self.execute("INSERT INTO members(IP, name, avatar, lunch_begin, lunch_end, rtime) VALUES (?,?,?,?,?,strftime('%s', 'now'))",ip,name,avatar,lunch_begin,lunch_end)
-        
-    def get_newest_members_data(self):    
-        return self.query("SELECT IP,name,avatar,lunch_begin,lunch_end,MAX(rtime) FROM members GROUP BY IP")
         
     def existsTable(self, tableName):
         result = self.query("select sql from sqlite_master where type = 'table' and upper(name) = '%s'" % tableName.upper())
